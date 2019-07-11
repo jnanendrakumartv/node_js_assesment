@@ -1,9 +1,13 @@
 import { addNewUser, getUsers, getUser, updateUser, deleteUser } from '../controllers/downloadController'
-// const { check, validationResult } = require('express-validator');
+
 const { check } = require('express-validator/check')
 const routes = (app) => {
-      // app.route('/assesment')    //     .get(getUsers)    //     // .post(addNewUser)     // app.route('/assement/:id')   //     .get(getUser)    //     .put(updateUser)    //     .delete(deleteUser)
-       
+      
+  const routes = (app) => {
+    app.route('/assesment')
+        .get(getUser)
+        .post(addNewUser)
+  }
           app.post('/assesment', [
             check('Firstname').isEmpty(),
             check('Lastname').isEmpty(),
