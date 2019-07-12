@@ -5,7 +5,7 @@ import bodyParser from 'body-parser'
 // import downloadModel from './src/models/downloadModel'
  
 const app = express()
-const PORT = 9000
+const PORT = 9001
  
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/usertable')
