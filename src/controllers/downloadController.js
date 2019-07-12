@@ -23,12 +23,17 @@ exports.addNewUser = (req, res,next) => {
                 Created_at:Created_at,
                 Updated_at:Updated_at
             })
-           
-        return user.save()
+            if(Password!==ConformPassword){
+                res.status(200).json({
+                    message: 'Password mismatch',
+                })   
+            }
+            else{
+            return user.save()
             .then(result => {
                 console.log(result);
                 res.status(200).json({
-                    message: 'New user created',
+                    message: 'user created',
                     userId: result._id
                 })
             })
@@ -38,6 +43,7 @@ exports.addNewUser = (req, res,next) => {
                 }
             next(err);
         })
+            }
     });
 }
 exports.getUsers = (req, res) => {
@@ -76,15 +82,15 @@ exports.login = (req,res,next) =>{
     .then(user =>{
         if(bcrypt.compare(Password,user.Password)&& bcrypt.compare(Email,user.Email)){
             res.status(200).json({
-                message: 'Login succesfull',
+                message: 'Login succesfully',
             })
         }
     })
+    const err='user not found'
     .catch(err => {
         if (!err.statusCode) {
-            err.statusCode = 500;
+            err.statusCode = 505;   
         }
         next(err);
     })  
 }
-
