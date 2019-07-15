@@ -1,28 +1,25 @@
 import { addNewUser, getUsers, login,getUser, updateUser, deleteUser } from '../controllers/downloadController'
 const { check } = require('express-validator/check')
 const routes = (app) => {
-  app.route('/assement') 
-    .get(getUsers)
+  // app.route('/assement') 
+ 
   app.route('/login')    
     .post(login)    
-  app.route('/assement/:id')   
-    .get(getUser)    
-    .put(updateUser)    
-    .delete(deleteUser)
+  
   app.post('/assesment', [
     check('Firstname').isEmpty(),
     check('Lastname').isEmpty(),
     check('Email').isEmpty().custom(email => {
       if (alreadyHaveEmail(email)) {
-        throw new Error('Email already registered')
+        throw new Error('Entered Email are already registered')
       }
     }),
     check('Password')
       .isLength({ min:8 })
-      .matches('[0-9]').withMessage("must and should use number")
-      .matches('[a-z]').withMessage("must and should use small letter")
-      .matches('[A-Z]').withMessage("must and should use capital letter")
-      .equals('ConformPassword').withMessage("password mismatch"),
+      .matches('[0-9]').withMessage("number are must use")
+      .matches('[a-z]').withMessage("small letter are must use")
+      .matches('[A-Z]').withMessage("capital letter must use")
+      .equals('ConformPassword').withMessage("Entered password are mismatch"),
     check('ConformPassword').isEmpty()
   ],addNewUser, (req, res) => {
     const errors = validationResult(req,res);
@@ -40,7 +37,6 @@ const routes = (app) => {
   });
 }
 export default routes;
-
 
 
 

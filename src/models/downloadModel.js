@@ -17,7 +17,7 @@ const UserSchema = new Schema({
         type: String,
         match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
         required:"Email is not valid",
-        unique:true
+       
     },
 
 
